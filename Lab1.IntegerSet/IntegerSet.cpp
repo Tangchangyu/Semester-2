@@ -31,7 +31,7 @@ IntegerSet IntegerSet::unionOfSets(const IntegerSet& b)const{
 IntegerSet IntegerSet::intersectionOfSets(const IntegerSet& b )const{
     IntegerSet result;
      for (int i = 0 ; i <101; i++){
-        if (set[i]&&1||b.set[i]==1) result.set[i]=1;
+        if (set[i]==1&&b.set[i]==1) result.set[i]=1;
     }
 
     return result;
@@ -52,16 +52,20 @@ void IntegerSet::deleteElement(int k){
 
 void IntegerSet::printSet()const{
     using std::cout;
-    bool flag = 0;
-    for (int i = 0;i<101;i++){
-        if (set[i]==1){
-            cout<<"i\a";
-            flag = 1;
-        }
+    IntegerSet empty;
+    if (empty.isEqualto(*this)){
+        cout<<"___"<<std::endl;
     }
-    if (flag == 0){
-        cout<<"___";
+    else{
+        cout <<"{\t";
+        for (int i = 0;i<101;i++){
+            if (set[i]==1){
+                cout<<i<<"\t";
+            }
     }
+        cout <<"\t}"<<std::endl;
+}
+    
 }
 
 bool IntegerSet::isEqualto(const IntegerSet& other)const{
@@ -83,11 +87,13 @@ void IntegerSet::inputSet(){
 while(k != -1){
     cout<<"Enter an element (-1 to end):";
     cin >> k;
+    if (k == -1){
+        cout <<"Entry complete"<<std::endl;
+        break;
+    }
     insertElement(k);
 }
 
-    if (k == -1){
-        cout <<"Entry complete"<<std::endl;
-    }
+    
 
 }

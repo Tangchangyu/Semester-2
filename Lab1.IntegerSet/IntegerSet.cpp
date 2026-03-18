@@ -19,19 +19,19 @@ IntegerSet::IntegerSet(const int* a,const int & lenth){
 
 }
 
-IntegerSet IntegerSet::unionOfSets(const IntegerSet& a ,const IntegerSet& b)const{
+IntegerSet IntegerSet::unionOfSets(const IntegerSet& b)const{
     IntegerSet result;
     for (int i = 0 ; i <101; i++){
-        if (a.set[i]==1||b.set[i]==1) result.set[i]=1;
+        if (set[i]==1||b.set[i]==1) result.set[i]=1;
     }
 
     return result;
 }
 
-IntegerSet IntegerSet::intersectionOfSets(const IntegerSet& a ,const IntegerSet& b )const{
+IntegerSet IntegerSet::intersectionOfSets(const IntegerSet& b )const{
     IntegerSet result;
      for (int i = 0 ; i <101; i++){
-        if (a.set[i]&&1||b.set[i]==1) result.set[i]=1;
+        if (set[i]&&1||b.set[i]==1) result.set[i]=1;
     }
 
     return result;

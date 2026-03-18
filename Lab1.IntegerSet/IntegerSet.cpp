@@ -76,3 +76,18 @@ bool IntegerSet::isEqualto(const IntegerSet& other)const{
 }
 
 
+void IntegerSet::inputSet(){
+    using  std::cin;
+    using  std::cout;
+    int k = 102;
+while(k != -1){
+    cout<<"Enter an element (-1 to end):";
+    cin >> k;
+    insertElement(k);
+}
+
+    if (k == -1){
+        cout <<"Entry complete"<<std::endl;
+    }
+
+}

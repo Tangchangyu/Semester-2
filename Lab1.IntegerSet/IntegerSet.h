@@ -14,4 +14,7 @@ public:
     void deleteElement(int k);
     void printSet()const;
     bool isEqualto(const IntegerSet&)const;
+
+    void inputSet();
+    
 };

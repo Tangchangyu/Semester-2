@@ -4,7 +4,7 @@ class HugeInteger
 { 
 public: 
 HugeInteger( int = 0 ); // conversion/default constructor 
-HugeInteger( const char * ); // conversion constructor 
+HugeInteger( const char * ); // conversion constructor (转换构造，类似于强制类型转换)
 // addition operator; HugeInteger + HugeInteger 
 HugeInteger operator +( const HugeInteger & )const; 
 // addition operator; HugeInteger + int 

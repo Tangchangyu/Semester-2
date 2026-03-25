@@ -1,4 +1,4 @@
-
+#pragma once
 #include<iostream>
 #include<string>
 #include<vector>
@@ -36,14 +36,21 @@ private:
 static int EmployeeCount;
 vector<Order> orders;
 
-    int dishNumber = 0 ;
+    //int dishNumber = 0 ;//无需使用计数器，vector自带.size函数
 public:
     Employee(string n,int ag):name(n),age(ag),id(EmployeeCount+1)
     {
         EmployeeCount++;
     }
-    void makeOrder(string dish,string t,bool dtd){
-        
+
+    bool makeOrder(string dish,string t,bool dtd){
+        if (orders.size()<3){
+            orders.push_back(Order(dish,t,dtd));
+            std::cout<<"点单成功，当前点单数量："<<orders.size()<<std::endl;
+            return 1;
+        }
+        else std::cout<<"您的点单数量已经达到上限(3)\n";
+        return 0;
     }
 
    

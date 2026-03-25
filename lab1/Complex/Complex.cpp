@@ -16,12 +16,11 @@ Complex Complex::operator*(const Complex& other) const{
 }
 
 bool Complex::operator==(const Complex& other ) const{
-    if (realPart==other.realPart && imaginaryPart== other.imaginaryPart) return 1;
-    else return 0;
+    return (realPart==other.realPart && imaginaryPart== other.imaginaryPart);
 }
 
 bool Complex::operator!=(const Complex& other)  const{
-    return (1-(*this==other));
+    return (!(*this==other));
 }
 void Complex::print() const{
     using std::cout;
@@ -34,11 +33,12 @@ std::ostream& operator<<(std::ostream& os,const Complex& c){
     return os;
 }
 
-std::istream& operator>>(std::istream& is, const Complex& c){
-    is.ignore(100,'(');
+std::istream& operator>>(std::istream& is,Complex& c){
+    is.ignore(10,'(');
     is >> c.realPart;
-    is.ignore(100,',');
-    is.ignore(100,')');
+    is.ignore(10,',');
+    is >> c.imaginaryPart;
+    is.ignore(10,')');
     return is;
 }//**
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 class Complex{
     private:
     double realPart;
@@ -16,6 +17,6 @@ class Complex{
 
 
     friend std::ostream& operator<<(std::ostream&, const Complex& );
-    friend std::istream& operator>>(std::istream&, const Complex& );
+    friend std::istream& operator>>(std::istream&, Complex& );//输出流参数不能使用const类型;
 
 };

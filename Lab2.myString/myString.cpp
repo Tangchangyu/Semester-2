@@ -2,8 +2,9 @@
 #include <iostream>
 
 ostream& operator<<(ostream& os,const String& s){
-    os<<*s.sPtr;
-}
+    os<<s.sPtr;//*表示第一个字符；
+    return os;
+}//j记得返回值
 
 String::String(const char* const s ){
     const char* end = s;
@@ -31,6 +32,8 @@ String::~String(){
 }
 
 const String& String::operator=(const String& s){
+    if(this == &s) return *this;//检查地址是否相同，相同就返回自身：
+
     length = s.length;
     delete []sPtr;
     sPtr = new char[length];

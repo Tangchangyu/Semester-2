@@ -1,8 +1,6 @@
 #include "HugeInt.h"
 HugeInt::HugeInt(long number){
-    for(int i = size -1; i>=0 ; i --){
-        integer[i]= 0 ;
-    }
+  
     for(int i = size -1; i>=0 ; i --){
         integer[i]=number%10;
         number=number/10;

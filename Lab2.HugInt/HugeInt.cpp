@@ -100,7 +100,7 @@ HugeInt HugeInt::operator-(const HugeInt& other)const{
     HugeInt result;
     for (int i = size - 1 ;i >=0 ; i--)
     {
-        result.integer[i]= integer[i] - other.integer[i];
+        result.integer[i]+= integer[i] - other.integer[i];
         if (result.integer[i]<0){
             result.integer[i]+=10;
             result.integer[i-1] -= 1;

@@ -20,7 +20,7 @@ void RationalNumber::reduction(){
     int co = 1;
     for (int a = 1;a<=denominator;a++){
         if(numerator % a == 0&& denominator % a == 0){
-            co = denominator;
+            co = a;
         }
     }
 
@@ -76,5 +76,6 @@ bool RationalNumber::operator>=(const RationalNumber& other)const{
 }
 
 void RationalNumber::printRational() const{
-    std::cout <<numerator <<"/" <<denominator;
+    if (denominator == 1 ) std::cout <<numerator;
+    else std::cout <<numerator <<"/" <<denominator;
 }

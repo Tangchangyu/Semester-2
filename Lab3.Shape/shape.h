@@ -6,13 +6,16 @@ using std::cout;
 using std::string;
 
 class Shape{
-    private:
+    protected:
     string id;
 
     protected:
     double S;
 
     public: 
+
+    Shape(string id):id(id){};
+
     void print(){
         std::cout<<"the area of "<<id<<" is:"<<S<<std::endl;
     }
@@ -24,7 +27,7 @@ class Circle:public Shape{
     double R;
     double place [2]={0,0};
 public:
-    Circle(double x ,double y ,double R):place{x,y},R(R){
+    Circle(string _id,double x ,double y ,double R):Shape(_id),place{x,y},R(R){
         if (R<0){
             R= 0;
         }
@@ -48,7 +51,7 @@ class Triangle:public Shape{
     double B [2];
     double C [2];
 public:
-    Triangle(double ax,double ay,double bx ,double by ,double cx, double cy):A{ax,ay},B{bx,by},C{cx,cy}{
+    Triangle(string _id,double ax,double ay,double bx ,double by ,double cx, double cy):Shape(_id),A{ax,ay},B{bx,by},C{cx,cy}{
         if (area()== 0){
             cout <<"illegal triangle! set A,B,C =(0,0)";
             A[0] = A[1]= B[0]=B[1]=C[0]=C[1]= 0;
@@ -75,7 +78,7 @@ protected:
     double rightBottom[2];
 
     public:
-    Rectangle(double ax ,double ay ,double bx,double by ):a(bx-ax),b(by-ay),leftTop{ax,ay},rightBottom{bx,by}{
+    Rectangle(string _id,double ax ,double ay ,double bx,double by ):Shape(_id),a(bx-ax),b(by-ay),leftTop{ax,ay},rightBottom{bx,by}{
         if(a>0&&b>0){
             area();
         }
@@ -95,7 +98,7 @@ protected:
 class Square:public Rectangle{
     
     public:
-    Square(double ax ,double ay ,double bx,double by ):a(bx-ax),b(by-ay),leftTop{ax,ay},rightBottom{bx,by}{
+    Square(string _id,double ax ,double ay ,double bx,double by ):Rectangle(_id,ax,ay,bx,by){
         if(a>0&&b>0){
             area();
         }
@@ -115,7 +118,8 @@ class Square:public Rectangle{
     }
 
     Circle incircle(){
-        Circle inc((leftTop[0]+rightBottom[0])/2,(leftTop[1]+rightBottom[1])/2,a/2);
+        string _id ="incircle of "+id;
+        Circle inc(_id,(leftTop[0]+rightBottom[0])/2,(leftTop[1]+rightBottom[1])/2,a/2);
         return inc;
     }
 };

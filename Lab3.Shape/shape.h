@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+
 using std::cout;
 using std::string;
 
@@ -27,7 +28,7 @@ public:
         if (R<0){
             R= 0;
         }
-        area()
+        area();
     }
      double area(){
         S = 3.14*R*R;
@@ -65,3 +66,57 @@ public:
 
 
 };
+
+class Rectangle:public Shape{
+protected:
+    double a;
+    double b;
+    double leftTop[2];
+    double rightBottom[2];
+
+    public:
+    Rectangle(double ax ,double ay ,double bx,double by ):a(bx-ax),b(by-ay),leftTop{ax,ay},rightBottom{bx,by}{
+        if(a>0&&b>0){
+            area();
+        }
+        else{
+            if (a<0) a=-a;
+            if (b<0) b = -b;
+            area();
+        } 
+    }
+
+    double area(){
+        S=a*b;
+        return S;
+    }
+};
+
+class Square:public Rectangle{
+    
+    public:
+    Square(double ax ,double ay ,double bx,double by ):a(bx-ax),b(by-ay),leftTop{ax,ay},rightBottom{bx,by}{
+        if(a>0&&b>0){
+            area();
+        }
+        else{
+            if (a<0) a=-a;
+            if (b<0) b = -b;
+            area();
+        } 
+        if(a != b){
+            cout<<"this shape is a Rectangle,not a Square."<<std::endl;
+        }
+    }
+
+    double area(){
+        S=a*b;
+        return S;
+    }
+
+    Circle incircle(){
+        Circle inc((leftTop[0]+rightBottom[0])/2,(leftTop[1]+rightBottom[1])/2,a/2);
+        return inc;
+    }
+};
+

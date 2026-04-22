@@ -4,20 +4,24 @@
 
 using std::cout;
 using std::string;
+using std::endl;
 
 class Shape{
-    protected:
-    string id;
+
 
     protected:
+    void printDot(double A[2]){
+        cout<<"("<<A[0]<<","<<A[1]<<")  ";
+    }
+    string id;
     double S;
 
     public: 
 
     Shape(string id):id(id){};
 
-    void print(){
-        std::cout<<"the area of "<<id<<" is:"<<S<<std::endl;
+    virtual void print(){
+        std::cout<<"id:"<<id<<"\n\tS:"<<S<<endl;
     }
 
 
@@ -33,15 +37,22 @@ public:
         }
         area();
     }
-     double area(){
+    double area(){
         S = 3.14*R*R;
         return S;
-     }
+    }
 
-     void setPlace(double x,double y){
+    void setPlace(double x,double y){
         place[1] = x;
         place [2] = y;
-     }
+    }
+
+    void print(){
+        Shape::print();
+        cout<<"\tCenter of circle:";
+        printDot(place);
+        cout<<"\tR:"<<R<<endl;
+    }
 
 
 };
@@ -64,6 +75,14 @@ public:
             S = -S;
         }
         return S;
+    }
+
+    void print(){
+        Shape::print();
+        cout <<" \tThree vertex:";
+        printDot(A);
+        printDot(B);
+        printDot(C);
     }
 
 
@@ -93,6 +112,16 @@ protected:
         S=a*b;
         return S;
     }
+
+    void print(){
+        Shape::print();
+        cout<<"\tThe leftTop dot:";
+        printDot(leftTop);
+        cout<<"\n\tThe rightBottom dot:";
+        printDot(rightBottom);
+        cout<<endl;
+
+    }
 };
 
 class Square:public Rectangle{
@@ -121,6 +150,15 @@ class Square:public Rectangle{
         string _id ="incircle of "+id;
         Circle inc(_id,(leftTop[0]+rightBottom[0])/2,(leftTop[1]+rightBottom[1])/2,a/2);
         return inc;
+    }
+
+    void print(){
+        Shape::print();
+        cout<<"\ta:"<<a<<"\n\tThe leftTop dot:";
+        printDot(leftTop);
+        cout<<"\nthe incircle of square:\n";
+        Circle inc= incircle();
+        inc.print();
     }
 };
 

@@ -21,7 +21,7 @@ class Shape{
     Shape(string id):id(id){};
 
     virtual void print(){
-        std::cout<<"id:"<<id<<"\n\tS:"<<S<<endl;
+        std::cout<<"Information of "<<id<<":\n\tS:"<<S<<endl;
     }
 
 
@@ -31,6 +31,10 @@ class Circle:public Shape{
     double R;
     double place [2]={0,0};
 public:
+    Circle(const Circle& other):Shape(other.id),R(other.R){
+        place[0]= other.place[0];
+        place[1]= other.place[1];
+    }
     Circle(string _id,double x ,double y ,double R):Shape(_id),place{x,y},R(R){
         if (R<0){
             R= 0;
@@ -51,7 +55,7 @@ public:
         Shape::print();
         cout<<"\tCenter of circle:";
         printDot(place);
-        cout<<"\tR:"<<R<<endl;
+        cout<<"\n\tR:"<<R<<endl;
     }
 
 
@@ -62,6 +66,14 @@ class Triangle:public Shape{
     double B [2];
     double C [2];
 public:
+    Triangle(const Triangle& other):Shape(other.id){
+        for(int i = 0;i<2; i++){
+            A[i]=other.A[i];
+            B[i]=other.B[i];
+            C[i]=other.C[i];
+        }
+    }
+
     Triangle(string _id,double ax,double ay,double bx ,double by ,double cx, double cy):Shape(_id),A{ax,ay},B{bx,by},C{cx,cy}{
         if (area()== 0){
             cout <<"illegal triangle! set A,B,C =(0,0)";
@@ -127,17 +139,13 @@ protected:
 class Square:public Rectangle{
     
     public:
-    Square(string _id,double ax ,double ay ,double bx,double by ):Rectangle(_id,ax,ay,bx,by){
+    Square(string _id,double ax ,double ay ,double a  ):Rectangle(_id,ax,ay,ax+a,ay+a){
         if(a>0&&b>0){
             area();
         }
         else{
             if (a<0) a=-a;
-            if (b<0) b = -b;
             area();
-        } 
-        if(a != b){
-            cout<<"this shape is a Rectangle,not a Square."<<std::endl;
         }
     }
 

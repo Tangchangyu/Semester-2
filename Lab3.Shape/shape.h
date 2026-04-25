@@ -34,6 +34,7 @@ public:
     Circle(const Circle& other):Shape(other.id),R(other.R){
         place[0]= other.place[0];
         place[1]= other.place[1];
+        area();
     }
     Circle(string _id,double x ,double y ,double R):Shape(_id),place{x,y},R(R){
         if (R<0){
@@ -72,6 +73,7 @@ public:
             B[i]=other.B[i];
             C[i]=other.C[i];
         }
+        area();
     }
 
     Triangle(string _id,double ax,double ay,double bx ,double by ,double cx, double cy):Shape(_id),A{ax,ay},B{bx,by},C{cx,cy}{
@@ -109,6 +111,15 @@ protected:
     double rightBottom[2];
 
     public:
+    Rectangle(const Rectangle& other):Shape(other.id){
+        for(int i = 0; i < 2; i++){
+            leftTop[i]=other.leftTop[i];
+            rightBottom[i]= other.rightBottom[i];
+                }
+        area();
+
+        
+    }
     Rectangle(string _id,double ax ,double ay ,double bx,double by ):Shape(_id),a(bx-ax),b(by-ay),leftTop{ax,ay},rightBottom{bx,by}{
         if(a>0&&b>0){
             area();
@@ -139,6 +150,9 @@ protected:
 class Square:public Rectangle{
     
     public:
+    Square(const Square& other):Rectangle(other.id,other.leftTop[0],other.leftTop[1],other.rightBottom[0],other.rightBottom[1]){
+        area();
+    }
     Square(string _id,double ax ,double ay ,double a  ):Rectangle(_id,ax,ay,ax+a,ay+a){
         if(a>0&&b>0){
             area();

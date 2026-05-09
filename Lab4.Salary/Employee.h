@@ -49,7 +49,7 @@ public:
         cout<<getFirstname()<<" "<<getLastname()<<std::endl;
         cout<<"birthday: ";
         birthday.print();
-        cout <<"social secirity number: "<<getSocialSecurityNumber();
+        cout <<"social security number: "<<getSocialSecurityNumber();
     }
     
     virtual double earnings()const = 0;
@@ -59,6 +59,10 @@ public:
         if(now ==birthday){
             cout <<"HAPPY BIRTHDAY!\n";
         }
+    }
+
+    virtual ~Employee(){
+
     }
 
 };
@@ -76,8 +80,6 @@ public:
        check();
     };
 
-    virtual ~SalariedEmployee(){};
-
     void setWeeklySalary(double s ){
         weeklySalary = s;
     }
@@ -89,7 +91,7 @@ public:
     virtual double earnings ()const override{return getWeeklySalary();}
 
     virtual void print() const override{
-        std::cout<<"salaried employed:";
+        std::cout<<"salaried employee:";
         Employee::print();
         std::cout <<"\nweekly salary: "<<getWeeklySalary()<<"\n";
         isBirthday();
@@ -205,7 +207,7 @@ class baseSalariedCommissionEmployee:public CommissionEmployee{
 private:
     double baseSalary;
 public:
-    baseSalariedCommissionEmployee(const string& fn,const string &ln,const string& ssn,const date &bir,double a = 0.0,double b = 0.0,double s):CommissionEmployee(fn,ln, ssn,bir,a,b){
+    baseSalariedCommissionEmployee(const string& fn,const string &ln,const string& ssn,const date &bir,double a = 0.0,double b = 0.0,double s = 0.0):CommissionEmployee(fn,ln, ssn,bir,a,b){
         setBaseSalary(s);
     }
 

@@ -5,16 +5,17 @@
 using std::string;
 
 class shape{
+protected:
+    void printDot(const double A[2])const;
 private:
     string id;
     double area;
 
 public:
     shape(const string&  );
-    virtual ~shape();
+    virtual ~shape()=0;
     double setArea(double s);
-
-    virtual double getArea()const =0;//使得类成为纯虚函数类，且纯虚函数必须在显式定义；
+    double getArea()const;
     virtual void print()const;
 };
 
@@ -23,8 +24,6 @@ class twoDimensionShape: public shape{
     twoDimensionShape(const string& );
 
     virtual ~twoDimensionShape();
-    virtual double getArea()const;
-    virtual void print()const override;
 
 };
 
@@ -33,13 +32,10 @@ class threeDimensionShape:public shape{
     double volume;
     
     public:
-
+    void setVolume(double);
     threeDimensionShape(const string& );
     virtual ~threeDimensionShape();
-
     virtual double getVolume() const;
-    virtual void print()const override;
-    virtual double getArea()const override;
 };
 
 class triangle:public twoDimensionShape{
@@ -50,7 +46,6 @@ class triangle:public twoDimensionShape{
 
     public:
     triangle(const string& ,const double[2],const double[2],const double[2]);
-    double getArea() const override;
     void print()const override;
     ~triangle();
 };
@@ -58,11 +53,10 @@ class triangle:public twoDimensionShape{
 class square:public twoDimensionShape{
     private:
     double leftTopDot[2];
-    double rightBottomDot[2];
+    double l;
 
     public:
-    square(const string& ,double[2],double[2]);
-    double getArea()override;
+    square(const string& ,double[2],double);
     void print() const override;
     ~square();
 
@@ -74,9 +68,8 @@ class circle:public twoDimensionShape{
     double R;
 
 public:
-    circle(const string & ,double,double[2]);
+    circle(const string & ,double[2],double);
     ~circle();
-    double getArea()override;
     void print() const override;
 };
 
@@ -85,10 +78,8 @@ class sphere:public threeDimensionShape{
     double R;
 
 public:
-    sphere(const string & ,double,double[2]);
+    sphere(const string & ,double[2],double);
     ~sphere();
-    double getArea()override;
     void print() const override;
-    void getVolume() override;
-    void print() const override;
+    
 };

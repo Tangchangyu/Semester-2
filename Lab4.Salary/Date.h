@@ -17,7 +17,7 @@ public:
         return month;
     }
 
-    date nowTime() const{
+    static date nowTime() {
         time_t now = time(0);
         struct tm* ptm = localtime(&now);
         int currentMonth = ptm->tm_mon + 1;
@@ -25,5 +25,10 @@ public:
 
         date NOW (currentMonth,currentDay);
         return NOW;
+    }
+
+    bool operator=(const date& other )const{
+        if (month == other.month&& day == other.day) return true;
+        else return false;
     }
 };

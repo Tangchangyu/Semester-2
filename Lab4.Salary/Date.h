@@ -1,20 +1,30 @@
+#pragma once
+
 #include<iostream>
 #include<stdexcept>
 #include<ctime>
+#include<string>
 
 class date{
-    
+    int year;
     int month;
     int day;
 
 public:
-    date(int m=1,int d = 1 ):month(m),day(d)
+    date(int m=1,int d = 1 ,int y = 2000):year(y),month(m),day(d)
     {
         
     }
 
     int getMonth()const{
         return month;
+    }
+
+    void print()const{
+        static const std::string monthNames[]={"January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"};
+
+        std::cout <<monthNames[month - 1]<<" "<<day<<", "<<year<<std::endl;
     }
 
     static date nowTime() {
@@ -27,8 +37,10 @@ public:
         return NOW;
     }
 
-    bool operator=(const date& other )const{
+    bool operator==(const date& other )const{
         if (month == other.month&& day == other.day) return true;
         else return false;
     }
+
+
 };

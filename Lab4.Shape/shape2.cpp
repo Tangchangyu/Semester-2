@@ -27,7 +27,10 @@ void twoDimensionShape::print()const{
 double twoDimensionShape::getArea()const{};
 
 threeDimensionShape::threeDimensionShape(const string &s):shape(s){};
-
+ threeDimensionShape::~threeDimensionShape(){};
+double threeDimensionShape::getVolume() const{
+    return volume;
+}
 
 
 
@@ -36,6 +39,15 @@ triangle::triangle(const string& s,const double a[2],const double b[2] ,const do
      A[0] = a[0]; A[1] = a[1];
      B[0] = b[0]; B[1] = b[1];
      C[0] = c[0]; C[1] = c[1];
+    double S = (A[0]-B[0])*(A[1]- C[1])-(A[1]- B[1])*(A[0]-C[0]);
+    if(S==0){
+        throw std::invalid_argument("Invalid triangle");
+    }
+    if (S<0){
+        S=-S;
+    }
+    setArea(S);
 }
+
 
 

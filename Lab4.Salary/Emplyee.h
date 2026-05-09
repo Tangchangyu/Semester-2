@@ -3,6 +3,8 @@
 #include<iostream>
 #include<string>
 #include<stdexcept>
+#include"Date.h"
+
 using std::string;
 using std::cout;
 
@@ -11,10 +13,10 @@ private:
     string firstname;
     string lastname;
     string socialSecurityNumber;
-    string birsday;
+    date birthday;
 public:
 
-    Employee(const string& fn,const string &ln,const string& ssn ,const string& bir):firstname(fn),lastname(ln),socialSecurityNumber(ssn),birsday(bir){
+    Employee(const string& fn,const string &ln,const string& ssn ,const date& bir):firstname(fn),lastname(ln),socialSecurityNumber(ssn),birthday(bir){
 
     }
 
@@ -44,10 +46,20 @@ public:
 
     virtual void print()const{
         using std::cout;
-        cout<<getFirstname()<<" "<<getLastname()<<std::endl<<"social secirity number: "<<getSocialSecurityNumber();
+        cout<<getFirstname()<<" "<<getLastname()<<std::endl;
+        cout<<"birthday: ";
+        birthday.print();
+        cout <<"social secirity number: "<<getSocialSecurityNumber();
     }
     
     virtual double earnings()const = 0;
+
+    void isBirthday()const{
+        date now=date::nowTime();
+        if(now ==birthday){
+            cout <<"HAPPY BIRTHDAY!\n";
+        }
+    }
 
 };
 
@@ -60,7 +72,7 @@ private:
         }
     }
 public:
-    SalariedEmployee(const string& fn ,const string& ln, const string& ssn,const string &bir,double s = 0.0 ):Employee(fn,ln, ssn,bir),weeklySalary(s){
+    SalariedEmployee(const string& fn ,const string& ln, const string& ssn,const date &bir,double s = 0.0 ):Employee(fn,ln, ssn,bir),weeklySalary(s){
        check();
     };
 
@@ -79,7 +91,10 @@ public:
     virtual void print() const override{
         std::cout<<"salaried employed:";
         Employee::print();
-        std::cout <<"\nweekly salary: "<<getWeeklySalary();
+        std::cout <<"\nweekly salary: "<<getWeeklySalary()<<"\n";
+        isBirthday();
+        cout<<"earned: $"<<earnings()<<std::endl;
+        
     }
 };
 
@@ -88,7 +103,7 @@ private:
     double grossSales;
     double commissionRate;
 public:
-    CommissionEmployee(const string& fn,const string &ln,const string& ssn,const string &bir,double a = 0.0,double b = 0.0):Employee(fn,ln, ssn,bir){
+    CommissionEmployee(const string& fn,const string &ln,const string& ssn,const date &bir,double a = 0.0,double b = 0.0):Employee(fn,ln, ssn,bir){
         setComissionrate(b);
         setGrossSales(a);
     }
@@ -122,8 +137,9 @@ public:
     virtual void print ()const override{
         std::cout <<"commission employee: ";
         Employee::print();
-        std::cout<< "\ngross sales: "<<getGrossSales()<<"; commission rate: "<<getCommissionrate();
-
+        std::cout<< "\ngross sales: "<<getGrossSales()<<"; commission rate: "<<getCommissionrate()<<std::endl;
+        isBirthday();
+        cout<<"earned: $"<<earnings()<<std::endl;
     }
 
 };
@@ -133,7 +149,7 @@ private:
     double hourlyWage;
     double hoursWorked;
 public:
-    hourlyEmployee(const string & fn,const string & ln,const string &ssn,const string &b,double hm=0.0,double h = 0.0):Employee(fn,ln,ssn,b){
+    hourlyEmployee(const string & fn,const string & ln,const string &ssn,const date &b,double hm=0.0,double h = 0.0):Employee(fn,ln,ssn,b){
         setHourlyWage(hm);
         setHoursWorked(h);
     }
@@ -166,7 +182,10 @@ public:
     virtual void print()const override{
         std::cout <<"\nhourly employee: ";
         Employee::print();
-        cout<<"hourly wage: "<<getHourlyWage()<<"; hours worked: "<<getHoursWored()<<"\n"
+        cout<<"hourly wage: "<<getHourlyWage()<<"; hours worked: "<<getHoursWored()<<"\n";
+        isBirthday();
+        cout<<"earned: $"<<earnings()<<std::endl;
+
     }
 
-}
+};

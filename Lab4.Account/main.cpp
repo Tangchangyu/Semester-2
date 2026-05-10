@@ -14,9 +14,10 @@ int main(){
         accPtr->debit(10);
         accPtr->credit(100);
 
-        SavingAccount* savingsPtr = dynamic_cast<SavingAccount*>(accPtr);
+        SavingAccount* savingsPtr = dynamic_cast<SavingAccount*>(accPtr);//判断accPtr是否为<SavingsAccount*>（或其子类），若不是则返回nullptr;
 
-        if (savingsPtr != nullptr){
+        if (savingsPtr != nullptr)//如果转换成功
+        {
             double interest = savingsPtr->calculateInterest();
             savingsPtr->credit(interest);
             std::cout <<"Credition has been done. \n";
@@ -24,7 +25,7 @@ int main(){
         }
 
         std::cout <<"Balance: "<<accPtr->getBalance()<<std::endl;
-        
+
     }
 
 }

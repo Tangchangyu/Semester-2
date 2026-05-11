@@ -27,5 +27,11 @@ int main(){
         std::cout <<"Balance: "<<accPtr->getBalance()<<std::endl;
 
     }
-
+// 在循环处理完逻辑后
+    for (Account* accPtr : ptr) {
+        delete accPtr;
+    }
+// 建议清空 vector，防止出现悬空指针
+    ptr.clear();
 }
+

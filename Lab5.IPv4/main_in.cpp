@@ -43,6 +43,27 @@ int main(){
         if (a[1]=='.'||a[2]=='.'){     CLASS[0]++;}
         else{
             int num = 100*(a[0]-'0')+10*(a[1]-'0')+(a[2]-'0');
+            if( 0<= num && num <= 127){
+                CLASS[0]++;
+            }
+            else if( 128<= num && num <= 191)
+            {
+                CLASS[1]++;
+            }
+            else if( 192<= num && num <= 223)
+            {
+                CLASS[2]++;
+            }
+            else if( 224<= num && num <= 239)
+            {
+                CLASS[3]++;
+            }
+            else if( 240<= num && num <= 255)
+            {
+                CLASS[4]++;
+            }
+
+            /*
             switch (num)
             {
             case 0 ... 127:
@@ -62,7 +83,7 @@ int main(){
                 break;
             default:
                 break;
-            }
+            }*/
         }
         
     }

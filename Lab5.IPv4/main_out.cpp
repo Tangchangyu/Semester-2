@@ -22,7 +22,7 @@
         static std::time_t startTime = std::time(0) - 365*24*3600;
         //实则传入的是更改的变量指针，0为nullptr;
         //前移一年时间：
-        startTime+= rand()% 24*3600;//保证位移时间在一天以内；
+        startTime+= rand()% (24*3600);//保证位移时间在一天以内；
         std::tm* now = std::localtime(&startTime);//lovaltime函数只接受地址
         /*
         工作原理：localtime 函数接受一个time_t指针，在内存中创建一个tm结构体，返回&tm；

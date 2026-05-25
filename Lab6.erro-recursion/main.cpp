@@ -16,8 +16,9 @@ try{
     throw recurssion("abnormal program termination.\n");
 }
 
-catch(recurssion anError){
-        throw recurssion("abnormal program termination.\n");
-
+catch(const recurssion &anError){
+        //throw recurssion("abnormal program termination.\n");
+        //使用以上代码——抛出一个新的异常
+    throw;
 }
 }

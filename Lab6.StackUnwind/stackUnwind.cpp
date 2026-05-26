@@ -6,8 +6,6 @@ using std::runtime_error;
 using std::string;
 using std::cout;
 
-static int time = 0;
-
 class TestException: public runtime_error{
     public:
     TestException(const string& s):runtime_error(s){};
@@ -17,7 +15,6 @@ class TestException: public runtime_error{
 void f(){
     cout<<"function f() has been called\n";
     throw TestException("this is an exception.");
-    time++;
 }
 
 void g(){
@@ -28,7 +25,6 @@ void g(){
 
     catch(...){
        cout<<"Caught TestException in g().\n";
-       cout<<"time:"<<time<<std::endl;
     };
 }
 
@@ -40,7 +36,6 @@ void h(){
     }
     catch(...){
         cout<<"Caught TestException in h().\n";
-               cout<<"time:"<<time<<std::endl;
     }
 }
 

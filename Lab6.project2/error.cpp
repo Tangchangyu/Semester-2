@@ -13,22 +13,27 @@ class Item{
             throw std::runtime_error("An exception was thrown!\n");
         }
         else {
-                        std::cout<<"an Item with the value of "<<value<<"has been constructed."<<std::endl;
+                        std::cout<<"an Item with the value of "<< value <<" has been constructed."<<std::endl;
 
         }
     }
 
     ~Item(){
-        std::cout<<"Item with value of "<<value<<"has been destructed.\n"<<std::endl;
+        std::cout<<"Item with value of "<< value <<" has been destructed."<<std::endl;
 
     }
 };
 
 int main(){
-    {
-        Item(1);
-    Item(2);
-    Item(3);
+    try {
+        Item it(1) ;
+    Item  i2(2);
+    Item i3(3);
+    Item i4 (4);
+}
+
+catch (const std::runtime_error& er){
+    std::cout <<"catch an exception.\n";
 }
     
 std::cout<<"the project will be closed.";

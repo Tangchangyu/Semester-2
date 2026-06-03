@@ -35,7 +35,7 @@ public:
 
                 delete [] TypePtr;//注意释放内存的正确写法
                 TypePtr = newPtr;
-                endPtr = newPtr+capacity+1;
+                endPtr = newPtr+capacity;
                 capacity = newcapacity;
                 *endPtr = element;
             }
@@ -52,7 +52,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os ,const Vector<T>&  );
 
     template<typename T>
-    friend std::istream& operator>>(std::ostream &is ,Vector<T>& );//流输入运算符的形参不能为const
+    friend std::istream& operator>>(std::istream &is ,Vector<T>& );//流输入运算符的形参不能为const
 
 };
 template<typename Type>
@@ -65,15 +65,13 @@ std::ostream& operator<<(std::ostream &os ,const Vector<Type>& my){
 
 //流输入运算符重载
 template<typename T>
-std::istream& operator>>(std::ostream &is ,Vector<T>& my){
-    T *nowPtr= my.TypePtr;
-    while(!is){
-        if(nowPtr != my.endPtr){
-
-            is>> *nowPtr;
-            nowPtr++;
-        }
+std::istream& operator>>(std::istream &is ,Vector<T>& my){
+    T element;
+    while(is>>element){
+        my.push_back(element);
     }
+
+    return is;
 }//实现逻辑：从vector首位开始pushback,直到输入特定字符^z？
 
 
@@ -82,5 +80,10 @@ std::istream& operator>>(std::ostream &is ,Vector<T>& my){
     Vector<int> myVector;
     myVector.push_back(1);
     std::cout <<myVector;
+
+    std::cout<<"请输入一串数据，来修改intVector的值：（使用^Z停止输入)";
+    std::cin>>myVector;
+    std::cout<<"now inVector is :"<<myVector;
+
     
  }

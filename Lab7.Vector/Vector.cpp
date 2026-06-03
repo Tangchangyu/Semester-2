@@ -51,14 +51,30 @@ public:
     template<typename T>//模板类友元函数的标准写法
     friend std::ostream& operator<<(std::ostream& os ,const Vector<T>&  );
 
+    template<typename T>
+    friend std::istream& operator>>(std::ostream &is ,Vector<T>& );//流输入运算符的形参不能为const
+
 };
 template<typename Type>
 std::ostream& operator<<(std::ostream &os ,const Vector<Type>& my){
     for (int i = 0; i < my.capacity; i++){
-        os<<my.TypePtr[i];
+        os<<my.TypePtr[i]<<" ";
     }
     return os;
 }
+
+//流输入运算符重载
+template<typename T>
+std::istream& operator>>(std::ostream &is ,Vector<T>& my){
+    T *nowPtr= my.TypePtr;
+    while(!is){
+        if(nowPtr != my.endPtr){
+
+            is>> *nowPtr;
+            nowPtr++;
+        }
+    }
+}//实现逻辑：从vector首位开始pushback,直到输入特定字符^z？
 
 
 

@@ -1,6 +1,8 @@
 #include <iostream>
 
 template<typename Type>
+
+//动态管理——从管理数据转向管理指针
 class Vector{
 private:
     size_t capacity;
@@ -37,7 +39,8 @@ public:
                 TypePtr = newPtr;
                 endPtr = newPtr+capacity;
                 capacity = newcapacity;
-                *endPtr = element;
+                *(endPtr)= element;//此处endPtr应后移一位
+                endPtr++;
             }
 
             else{
@@ -57,7 +60,7 @@ public:
 };
 template<typename Type>
 std::ostream& operator<<(std::ostream &os ,const Vector<Type>& my){
-    for (int i = 0; i < my.capacity; i++){
+    for (int i = 0; i < (my.endPtr-my.TypePtr); i++){
         os<<my.TypePtr[i]<<" ";
     }
     return os;
@@ -72,14 +75,14 @@ std::istream& operator>>(std::istream &is ,Vector<T>& my){
     }
 
     return is;
-}//实现逻辑：从vector首位开始pushback,直到输入特定字符^z？
+}//实现逻辑：从vector有效数据后一位开始pushback,直到输入特定字符^z？
 
 
 
  int main(){
     Vector<int> myVector;
     myVector.push_back(1);
-    std::cout <<myVector;
+    std::cout <<myVector<<" \n";
 
     std::cout<<"请输入一串数据，来修改intVector的值：（使用^Z停止输入)";
     std::cin>>myVector;

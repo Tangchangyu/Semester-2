@@ -8,6 +8,15 @@ private:
     Type* endPtr=nullptr;//Type* 代表指针！！！
 
 public:
+    // 构造函数初始化
+    Vector() : capacity(0), TypePtr(nullptr), endPtr(nullptr) {}
+
+    // 析构函数：防止内存泄漏
+    ~Vector() {
+        delete[] TypePtr;}
+
+
+
     void push_back(Type element){
         if (capacity == 0){
             TypePtr = new Type[1];
@@ -32,7 +41,7 @@ public:
             }
 
             else{
-                endPtr[0]= element
+                endPtr[0]= element;
                 endPtr++;//修改指针逻辑时，注意内存越界
             }
         }

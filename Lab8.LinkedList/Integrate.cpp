@@ -17,7 +17,8 @@ class LinkedStack{
 public:    
     LinkedStack():top(nullptr){};
 
-    LinkedStack(const LinkedStack<T> &original){
+    LinkedStack(const LinkedStack<T> &original):top(nullptr)
+    {
         node<T>* ptr=original.top;
         LinkedStack<T> temp;
         while (ptr != nullptr)
@@ -79,7 +80,7 @@ template<typename T>
 std::ostream& operator<<(std::ostream& os ,const LinkedStack<T>& list){
     node<T> *temp = list.top;
     while(temp != nullptr){
-        os <<temp->data;
+        os <<temp->data<<" ";
         temp = temp->next;
     }
     return os;

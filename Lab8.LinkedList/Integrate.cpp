@@ -16,6 +16,13 @@ class LinkedStack{
 public:    
     LinkedStack():top(nullptr){};
 
+    ~LinkedStack(){
+        while (!isEmpty()){
+            pop();
+        }
+        //delete top;无效操作
+    }
+
 
     void push(T value){
         node<T> *newNode= new T(value);
@@ -25,7 +32,7 @@ public:
 
     void pop(){
         if(top == nullptr){
-            throw std::invalid_argument("The stack is empty;\n");
+            throw std::out_of_range("The stack is empty;\n");//越界错误，或抛出std::underflow_error()下溢错误；
         }
         else{
         node<T> *temp = top;
@@ -34,5 +41,7 @@ public:
         }
     }
 
-    
+    bool isEmpty(){
+        return (top == nullptr);
+    }    
 };

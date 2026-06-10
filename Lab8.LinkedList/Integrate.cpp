@@ -17,6 +17,24 @@ class LinkedStack{
 public:    
     LinkedStack():top(nullptr){};
 
+    LinkedStack(LinkedStack<T> original){
+        node<T>* ptr=original->top;
+        LinkedStack<T> temp;
+        while (ptr != nullptr)
+        {
+            temp.push(ptr->data);
+            ptr = ptr->next;
+        }
+
+        ptr = temp.top;
+
+        while(ptr != nullptr){
+            push(ptr->data);
+            ptr=ptr->next;
+        }
+        
+    }
+
     ~LinkedStack(){
         while (!isEmpty()){
             pop();
@@ -47,13 +65,38 @@ public:
     }    
 
 template<typename T>
-friend std::ostream& operator<<(std::ostream& ,const LinkedStack&);
+friend std::ostream& operator<<(std::ostream& ,const LinkedStack<T>&);//表明此函数可以访问类的私有数据成员；
     
 
 };
 
+
+
 template<typename T>
-LinkedStack<T> merge(LinkedStack<T> &Stack1,LinkedStack<T> &Stack2);
+std::ostream& operator<<(std::ostream& os ,const LinkedStack<T>& list){
+    node<T> *temp = list.top;
+    while(top != nullptr){
+        os <<temp->data;
+        temp = temp->next;
+    }
+    return os;
+}
+
+
+template<typename T>
+LinkedStack<T> merge(const LinkedStack<T> &Stack1,const LinkedStack<T> &Stack2){
+    
+};
+
+template<typename T>
+LinkedStack<T> backwardStack(const LinkedStack<T>& orientedStack){
+    node<T>* ptr = orientedStack->top;
+    LinkedStack<T> backStack;
+    while( ptr != nullptr){
+        backStack.push(ptr->data);
+    }
+    return backStack;
+}//未调用拷贝构造函数，不能在拷贝构造中复用——赋值的过程就要调用拷贝构造函数
 
 int main (){
 using std::cout;

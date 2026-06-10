@@ -12,7 +12,7 @@ public:
 
 template<class T>
 class LinkedStack{
-    node<T> *top;
+    node<T> *top = nullptr;
 
 public:    
     LinkedStack():top(nullptr){};

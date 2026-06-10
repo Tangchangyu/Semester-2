@@ -7,7 +7,7 @@ public:
     T data;
     node<T> *next;//结构：一数据一指针
 
-    node(Data):data(Data),next(nullptr){};
+    node(T Data):data(Data),next(nullptr){};
 };
 
 template<class T>
@@ -17,7 +17,7 @@ class LinkedStack{
 public:    
     LinkedStack():top(nullptr){};
 
-    LinkedStack(LinkedStack<T> original){
+    LinkedStack(const LinkedStack<T> &original){
         node<T>* ptr=original->top;
         LinkedStack<T> temp;
         while (ptr != nullptr)
@@ -44,7 +44,7 @@ public:
 
 
     void push(T value){
-        node<T> *newNode= new T(value);
+        node<T> *newNode= new node<T>(value);
         newNode->next = top;
         top = newNode;
     }
@@ -75,7 +75,7 @@ friend std::ostream& operator<<(std::ostream& ,const LinkedStack<T>&);//表明�
 template<typename T>
 std::ostream& operator<<(std::ostream& os ,const LinkedStack<T>& list){
     node<T> *temp = list.top;
-    while(top != nullptr){
+    while(list.top != nullptr){
         os <<temp->data;
         temp = temp->next;
     }
@@ -85,13 +85,15 @@ std::ostream& operator<<(std::ostream& os ,const LinkedStack<T>& list){
 
 template<typename T>
 LinkedStack<T> merge(const LinkedStack<T> &Stack1,const LinkedStack<T> &Stack2){
-    
-};
+    LinkedStack<T> tempStack=backwardStack(Stack2);
+    LinkedStack<T> backStack = backwardStack(Stack1,tempStack);
+    return backwardStack(backStack);
+}
 
 template<typename T>
-LinkedStack<T> backwardStack(const LinkedStack<T>& orientedStack){
+LinkedStack<T> backwardStack(const LinkedStack<T>& orientedStack, LinkedStack<T> baseStack=LinkedStack<T>()){
     node<T>* ptr = orientedStack->top;
-    LinkedStack<T> backStack;
+    LinkedStack<T> backStack=baseStack;
     while( ptr != nullptr){
         backStack.push(ptr->data);
     }

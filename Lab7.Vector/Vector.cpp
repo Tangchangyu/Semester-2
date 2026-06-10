@@ -54,6 +54,9 @@ public:
     template<typename T>//模板类友元函数的标准写法
     friend std::ostream& operator<<(std::ostream& os ,const Vector<T>&  );
 
+    //    friend std::ostream& operator<<<Type>(std::ostream& os ,const Vector<Type>&  );//模板友元函数
+
+
     template<typename T>
     friend std::istream& operator>>(std::istream &is ,Vector<T>& );//流输入运算符的形参不能为const
 
